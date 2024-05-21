@@ -127,3 +127,215 @@ public void Build_ReturnsCarWithCorrectProperties()
     Assert.Equal(BodyType.Sedan, car.BodyType);
 }
 ```
+## База данных
+
+В этом проекте в качестве базы данных используется SQLite.
+
+### Схема базы данных
+![](https://github.com/gjotov/CarApp/blob/master/Databasescr.png)
+
+База данных состоит из следующих таблиц:
+
+***Cars***
+- `CarId`: уникальный идентификатор автомобиля (первичный ключ).
+- `Make`: марка автомобиля.
+- `Model`: модель автомобиля.
+- `Price`: цена автомобиля.
+- `HasDiscount`: флаг, указывающий, есть ли скидка на автомобиль (true/false).
+- `Discount`: размер скидки на автомобиль.
+- `ProductionDate`: дата производства автомобиля.
+
+***Configurations***
+- `ConfigurationId`: уникальный идентификатор конфигурации (первичный ключ).
+- `CarId`: идентификатор автомобиля (внешний ключ к таблице "Cars").
+- `BodyType`: тип кузова автомобиля (фаэтон, лимузин, кабриолет и т.д.).
+
+***Additional Service***
+- ServiceId: уникальный идентификатор дополнительной услуги (первичный ключ).
+- ServiceName: название дополнительной услуги.
+- ServiceCost: стоимость дополнительной услуги.
+
+  ***Purchares***
+- `PurchaseId`: уникальный идентификатор покупки (первичный ключ).
+- `CarId`: идентификатор автомобиля (внешний ключ к таблице "Cars").
+- `ConfigurationId`: идентификатор конфигурации автомобиля (внешний ключ к таблице "Configurations").
+- `AdditionalServiceIds`: строка с идентификаторами дополнительных услуг, разделенными запятыми.
+- `TotalPrice`: общая цена покупки.
+  
+### Примеры использования
+Используйте следующие SQL запросы для вставки данных в таблицы.
+### Вставка данных в таблицу `Cars`
+```sql
+INSERT INTO Cars (Make, Model, Price, HasDiscount, Discount, ProductionDate)
+VALUES ('Toyota', 'Camry', 30000, 1, 10, '2023-01-01');
+```
+### Вставка данных в таблицу `Configurations`
+```sql
+INSERT INTO Configurations (CarId, BodyType)
+VALUES (1, 'Sedan');
+```
+### Вставка данных в таблицу `AdditionalServices`
+```sql
+INSERT INTO AdditionalServices (ServiceName, ServiceCost)
+VALUES ('Extended Warranty', 1200),
+       ('GPS Navigation', 300),
+       ('Premium Sound System', 500);
+```
+### Вставка данных в таблицу `Purchases`
+```sql
+INSERT INTO Purchases (CarId, ConfigurationId, AdditionalServiceIds, TotalPrice)
+VALUES (1, 1, '1,2', 32000);
+```
+## Интеграция с приложением
+В проекте Visual Studio добавьте пакет SQLite через NuGet Package Manager
+```bash
+Install-Package System.Data.SQLite
+```
+### Пример использования SQLite в C#
+```csharp
+using System;
+using System.Data.SQLite;
+
+namespace CarApp
+{
+    public class DatabaseHelper
+    {
+        private const string ConnectionString = "Data Source=AutoDealerDB.db;Version=3;";
+
+        public static void InitializeDatabase()
+        {
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string createCarsTableQuery = @"
+                CREATE TABLE IF NOT EXISTS Cars (
+                    CarId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Make TEXT NOT NULL,
+                    Model TEXT NOT NULL,
+                    Price REAL NOT NULL,
+                    HasDiscount BOOLEAN NOT NULL,
+                    Discount REAL NOT NULL,
+                    ProductionDate TEXT NOT NULL
+                );";
+                ExecuteNonQuery(createCarsTableQuery, connection);
+
+                string createConfigurationsTableQuery = @"
+                CREATE TABLE IF NOT EXISTS Configurations (
+                    ConfigurationId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    CarId INTEGER NOT NULL,
+                    BodyType TEXT NOT NULL,
+                    FOREIGN KEY (CarId) REFERENCES Cars (CarId)
+                );";
+                ExecuteNonQuery(createConfigurationsTableQuery, connection);
+
+                string createAdditionalServicesTableQuery = @"
+                CREATE TABLE IF NOT EXISTS AdditionalServices (
+                    ServiceId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    ServiceName TEXT NOT NULL,
+                    ServiceCost REAL NOT NULL
+                );";
+                ExecuteNonQuery(createAdditionalServicesTableQuery, connection);
+
+                string createPurchasesTableQuery = @"
+                CREATE TABLE IF NOT EXISTS Purchases (
+                    PurchaseId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    CarId INTEGER NOT NULL,
+                    ConfigurationId INTEGER NOT NULL,
+                    AdditionalServiceIds TEXT NOT NULL,
+                    TotalPrice REAL NOT NULL,
+                    FOREIGN KEY (CarId) REFERENCES Cars (CarId),
+                    FOREIGN KEY (ConfigurationId) REFERENCES Configurations (ConfigurationId)
+                );";
+                ExecuteNonQuery(createPurchasesTableQuery, connection);
+            }
+        }
+
+        private static void ExecuteNonQuery(string query, SQLiteConnection connection)
+        {
+            using (var command = new SQLiteCommand(query, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public static void InsertCar(string make, string model, double price, bool hasDiscount, double discount, string productionDate)
+        {
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "INSERT INTO Cars (Make, Model, Price, HasDiscount, Discount, ProductionDate) VALUES (@Make, @Model, @Price, @HasDiscount, @Discount, @ProductionDate)";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Make", make);
+                    command.Parameters.AddWithValue("@Model", model);
+                    command.Parameters.AddWithValue("@Price", price);
+                    command.Parameters.AddWithValue("@HasDiscount", hasDiscount);
+                    command.Parameters.AddWithValue("@Discount", discount);
+                    command.Parameters.AddWithValue("@ProductionDate", productionDate);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void InsertConfiguration(int carId, string bodyType)
+        {
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "INSERT INTO Configurations (CarId, BodyType) VALUES (@CarId, @BodyType)";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CarId", carId);
+                    command.Parameters.AddWithValue("@BodyType", bodyType);
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public static void InsertAdditionalService(string serviceName, double serviceCost)
+    {
+        using (var connection = new SQLiteConnection(ConnectionString))
+        {
+            connection.Open();
+
+            string query = "INSERT INTO AdditionalServices (ServiceName, ServiceCost) VALUES (@ServiceName, @ServiceCost)";
+
+            using (var command = new SQLiteCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@ServiceName", serviceName);
+                command.Parameters.AddWithValue("@ServiceCost", serviceCost);
+
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public static void InsertPurchase(int carId, int configurationId, string additionalServiceIds, double totalPrice)
+    {
+        using (var connection = new SQLiteConnection(ConnectionString))
+        {
+            connection.Open();
+
+            string query = "INSERT INTO Purchases (CarId, ConfigurationId, AdditionalServiceIds, TotalPrice) VALUES (@CarId, @ConfigurationId, @AdditionalServiceIds, @TotalPrice)";
+
+            using (var command = new SQLiteCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@CarId", carId);
+                command.Parameters.AddWithValue("@ConfigurationId", configurationId);
+                command.Parameters.AddWithValue("@AdditionalServiceIds", additionalServiceIds);
+                command.Parameters.AddWithValue("@TotalPrice", totalPrice);
+
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+}
+```
+
+
