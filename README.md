@@ -9,10 +9,9 @@
 - ![.NET Core](https://img.shields.io/badge/.NET_Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white) 
 - ![WPF](https://img.shields.io/badge/WPF-0078D7?style=for-the-badge&logo=microsoft&logoColor=white) 
 - ![MVVM](https://img.shields.io/badge/MVVM-512BD4?style=for-the-badge&logo=visualstudio&logoColor=white) 
-- ![xUnit](https://img.shields.io/badge/xUnit-5D1F92?style=for-the-badge&logo=xunit&logoColor=white) 
+- ![xUnit](https://img.shields.io/badge/xUnit-7C39C9?style=for-the-badge&logo=xunit&logoColor=white)
 - ![XML](https://img.shields.io/badge/XML-FF6600?style=for-the-badge&logo=xml&logoColor=white)
-- ![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=sql&logoColor=white) 
-
+- ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 
 ## Функциональность
 ![Demo](https://github.com/gjotov/CarApp/blob/master/demonstration.gif)
@@ -28,7 +27,7 @@
 
 1. Склонируйте репозиторий на свой локальный компьютер:
     ```bash
-    git clone https://github.com/your-repo/CarDealershipApp.git
+    git clone https://github.com/gjotov/CarApp.git
     ```
 
 2. Откройте решение в Visual Studio.
