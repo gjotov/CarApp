@@ -10,7 +10,8 @@
 - ![WPF](https://img.shields.io/badge/WPF-0078D7?style=for-the-badge&logo=microsoft&logoColor=white) 
 - ![MVVM](https://img.shields.io/badge/MVVM-512BD4?style=for-the-badge&logo=visualstudio&logoColor=white) 
 - ![xUnit](https://img.shields.io/badge/xUnit-5D1F92?style=for-the-badge&logo=xunit&logoColor=white) 
-- ![XML](https://img.shields.io/badge/XML-FF6600?style=for-the-badge&logo=xml&logoColor=white) 
+- ![XML](https://img.shields.io/badge/XML-FF6600?style=for-the-badge&logo=xml&logoColor=white)
+- ![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=sql&logoColor=white) 
 
 
 ## Функциональность
@@ -22,17 +23,6 @@
 - Подсчёт цены автомобиля с учётом скидки.
 - Подсчёт скидки от первоначальной цены и итоговой.
 - Формирование чека покупки с указанием наименования автосалона, наименования автомобиля и его комплектации, дополнительных услуг и их стоимости, а также общей цены.
-
-### Типы кузовов автомобилей:
-- Фаэтон
-- Лимузин
-- Кабриолет
-- Седан
-- Родстер
-- Купе
-- Пикап
-- Универсал
-- Хэтчбек
 
 ## Установка
 
