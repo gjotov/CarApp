@@ -1,0 +1,39 @@
+﻿<Window x:Class="CarApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarApp"
+        mc:Ignorable="d"
+        Title="Car Dealer App" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Column="0" ItemsSource="{Binding Cars}" DisplayMemberPath="Model" SelectedItem="{Binding SelectedCar}" />
+
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Комплектация" FontWeight="Bold" Margin="0,0,0,10" />
+            <TextBlock Text="{Binding SelectedCar.Make}" />
+            <TextBlock Text="{Binding SelectedCar.Model}" />
+            <TextBlock Text="{Binding SelectedCar.BodyType}" />
+            <TextBlock Text="{Binding SelectedCar.Price, StringFormat={}{0:C}}" />
+            <TextBlock Text="Скидка:" />
+            <TextBlock Text="{Binding SelectedCar.Discount, StringFormat={}{0:P}}" />
+            <TextBlock Text="Итоговая стоимость:" />
+            <TextBlock Text="{Binding TotalPrice, StringFormat={}{0:C}}" />
+        </StackPanel>
+
+        <Button Grid.ColumnSpan="2" Grid.Row="1" Content="Выбрать комплектацию" Command="{Binding OpenConfigurationWindowCommand}" />
+    </Grid>
+</Window>
