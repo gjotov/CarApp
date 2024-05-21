@@ -6,10 +6,12 @@
 
 ## Используемые технологии
 
-- **.NET Core**: Используется для создания основных библиотек и логики приложения.
-- **WPF (Windows Presentation Foundation)**: Используется для создания пользовательского интерфейса.
-- **MVVM (Model-View-ViewModel)**: Шаблон проектирования, используемый для разделения логики представления и бизнес-логики.
-- **xUnit**: Фреймворк для написания и запуска юнит-тестов.
+- ![.NET Core](https://img.shields.io/badge/.NET_Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white) 
+- ![WPF](https://img.shields.io/badge/WPF-0078D7?style=for-the-badge&logo=microsoft&logoColor=white) 
+- ![MVVM](https://img.shields.io/badge/MVVM-512BD4?style=for-the-badge&logo=visualstudio&logoColor=white) 
+- ![xUnit](https://img.shields.io/badge/xUnit-5D1F92?style=for-the-badge&logo=xunit&logoColor=white) 
+- ![XML](https://img.shields.io/badge/XML-FF6600?style=for-the-badge&logo=xml&logoColor=white) 
+
 
 ## Функциональность
 ![Demo](https://github.com/gjotov/CarApp/blob/master/demonstration.gif)
