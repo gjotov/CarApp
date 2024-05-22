@@ -139,7 +139,7 @@ public void Build_ReturnsCarWithCorrectProperties()
 ```
 # База данных
 
-В этом проекте в качестве базы данных используется SQLite.
+В этом проекте в качестве базы данных может быть использована SQLite.
 
 ### Схема базы данных
 ![](https://github.com/gjotov/CarApp/blob/master/Databasescr.png)
