@@ -154,7 +154,7 @@ public void Build_ReturnsCarWithCorrectProperties()
 - ServiceName: название дополнительной услуги.
 - ServiceCost: стоимость дополнительной услуги.
 
-  ***Purchares***
+***Purchares***
 - `PurchaseId`: уникальный идентификатор покупки (первичный ключ).
 - `CarId`: идентификатор автомобиля (внешний ключ к таблице "Cars").
 - `ConfigurationId`: идентификатор конфигурации автомобиля (внешний ключ к таблице "Configurations").
