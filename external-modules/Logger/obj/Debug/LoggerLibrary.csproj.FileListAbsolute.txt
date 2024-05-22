@@ -1,0 +1,6 @@
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\Logger\bin\Debug\Logger.dll
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\Logger\bin\Debug\Logger.pdb
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\Logger\obj\Debug\LoggerLibrary.csproj.AssemblyReference.cache
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\Logger\obj\Debug\LoggerLibrary.csproj.CoreCompileInputs.cache
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\Logger\obj\Debug\Logger.dll
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\Logger\obj\Debug\Logger.pdb

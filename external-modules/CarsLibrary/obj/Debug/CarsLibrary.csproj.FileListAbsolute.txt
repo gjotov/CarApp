@@ -1,0 +1,6 @@
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\CarsLibrary\bin\Debug\CarsLibrary.dll
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\CarsLibrary\bin\Debug\CarsLibrary.pdb
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\CarsLibrary\obj\Debug\CarsLibrary.csproj.AssemblyReference.cache
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\CarsLibrary\obj\Debug\CarsLibrary.csproj.CoreCompileInputs.cache
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\CarsLibrary\obj\Debug\CarsLibrary.dll
+C:\Users\sisso\OneDrive\Desktop\Дмитриев\CarsLibrary\obj\Debug\CarsLibrary.pdb
